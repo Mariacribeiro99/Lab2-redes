@@ -110,6 +110,19 @@ No PC 2:
 No I thinks this really might work
 You may now do your crazy stuff
 
+Configurar a porta 11 no switch para vlan11:
+```
+configure terminal
+interface fastethernet 0/11
+switchport mode access
+switchport access vlan 11
+end
+show running-config interface fastethernet 0/11
+show interfaces fastethernet 0/11 switchport
+```
 
+PC4:
+eth0-->IP:172.16.10.254 MAC:00:21:5a:61:2f:24
+eth1-->IP:172.16.11.253 MAC:00:c0:df:04:20:99
 
 
