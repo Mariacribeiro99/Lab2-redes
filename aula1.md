@@ -20,7 +20,7 @@ ifconfig eth0 172.16.11.1/24
 route -n
 ```
 
-No PC 3, entrar no gtkterminal e executar
+No PC 4, entrar no gtkterminal e executar
 ```
 telnet 172.16.1.10
 ```
@@ -34,29 +34,31 @@ end
 show vlan id 10
 ```
 
-Como o PC 3 está ligado à porta 5 do switch:
+Como o PC 4 está ligado ao switch, configuramos as portas:
 ```
 configure terminal
-interface fastethernet 0/5
+interface fastethernet 0/15
 switchport mode access
 switchport access vlan 10
 end
-show running-config interface fastethernet 0/5
-show interfaces fastethernet 0/5 switchport
+show running-config interface fastethernet 0/15
+show interfaces fastethernet 0/15 switchport
 ```
 
-Fazer o mesmo para a porta 9, que está ligada ao PC 4.
+Fazer o mesmo para a porta 13:
 ```
 configure terminal
-interface fastethernet 0/9
+interface fastethernet 0/13
 switchport mode access
 switchport access vlan 10
 end
-show running-config interface fastethernet 0/9
-show interfaces fastethernet 0/9 switchport
+show running-config interface fastethernet 0/13
+show interfaces fastethernet 0/13 switchport
 ```
+Criamos vlan10, com PC3 ligado à port 13, e com o PC15 ligado à port 15.
 
-Agora criar vlan 1 e adicionar a porta 2 (ligada ao PC 2)
+
+Agora criar vlan 1 e adicionar a porta 9 (ligada ao PC 2)
 ```
 configure terminal
 vlan 11
@@ -64,12 +66,12 @@ end
 show vlan id 11
 
 configure terminal
-interface fastethernet 0/2
+interface fastethernet 0/9
 switchport mode access
 switchport access vlan 11
 end
-show running-config interface fastethernet 0/2
-show interfaces fastethernet 0/2 switchport
+show running-config interface fastethernet 0/9
+show interfaces fastethernet 0/9 switchport
 ```
 Em todos os PCs
 ```
