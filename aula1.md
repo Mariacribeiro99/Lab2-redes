@@ -124,5 +124,47 @@ show interfaces fastethernet 0/11 switchport
 PC4:
 eth0-->IP:172.16.10.254 MAC:00:21:5a:61:2f:24
 eth1-->IP:172.16.11.253 MAC:00:c0:df:04:20:99
+```
+
+Configurar router comercial (???)
+
+```
+
+configure terminal
+interface gigabitethernet 0/0     
+ip address 172.16.11.254 255.255.255.0 
+no shutdown 
+ip nat inside        
+exit
+configure terminal
+interface gigabitethernet 0/1
+ip address 172.16.1.19 255.255.255.0 
+no shutdown 
+ip nat outside               
+exit
+
+```
+
+Configurar NAT (???)
+
+```
+ip nat pool ovrld 172.16.1.19 172.16.1.19 prefix 24       
+ip nat inside source list 1 pool ovrld overload       
+access-list 1 permit 172.16.10.0 0.0.0.7       
+access-list 1 permit 172.16.11.0 0.0.0.7      
+ip route 0.0.0.0 0.0.0.0 172.16.1.254 
+ip route 172.16.40.0 255.255.255.0 172.16.11.253 
+end
+
+
+TUX3: route add default gw 172.16.10.254
+TUX2: route add default gw 172.16.11.254 
+TUX4: route add default gw 172.16.11.254 
+
+```
+Configuração DNS
+```
+
+echo $'search netlab.fe.up.pt\nnameserver 172.16.1.2' > /etc/resolv.conf
 
 
